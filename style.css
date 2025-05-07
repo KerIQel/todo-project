@@ -333,3 +333,145 @@ footer {
 .social-links a:hover {
     color: #4a90e2;
 }
+@media (max-width: 768px) {
+    html, body {
+        font-size: 16px; /* базовый размер шрифта */
+    }
+
+    header {
+        padding: 10px 0;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .search input {
+        width: 100%;
+        font-size: 1rem;
+        padding: 10px 12px;
+    }
+
+    .auth-buttons {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+
+    .auth-buttons button {
+        flex: 1;
+        padding: 12px 0;
+        font-size: 1.1rem;
+    }
+
+    .container {
+        padding: 0 15px;
+        margin: 15px auto;
+        max-width: 100%;
+    }
+
+    #addTaskBtn {
+        width: 100%;
+        padding: 12px 0;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    button {
+        font-size: 1.1rem;
+        padding: 12px 0;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 20% auto 10% auto;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    #taskFormContent input,
+    #taskFormContent textarea,
+    #taskFormContent select {
+        font-size: 1rem;
+        padding: 12px;
+    }
+
+    #taskFormContent button {
+        font-size: 1.1rem;
+        padding: 12px 0;
+    }
+
+    /* Сетка задач: 1 колонка вместо 3 */
+    .task-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .task-card {
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .task-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .task-card p {
+        font-size: 1rem;
+    }
+
+    .task-card .deadline,
+    .task-card .tags span,
+    .task-card .status {
+        font-size: 0.85rem;
+    }
+
+    .task-card button {
+        font-size: 1rem;
+        padding: 10px 12px;
+        margin-top: 8px;
+        margin-right: 8px;
+    }
+
+    footer {
+        padding: 30px 15px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px;
+        max-width: 100%;
+    }
+
+    .footer-section {
+        margin-right: 0;
+    }
+
+    .footer-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.9rem;
+    }
+
+    .social-links li {
+        margin: 8px 0;
+    }
+}
