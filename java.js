@@ -4,13 +4,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-const addTaskBtn = document.getElementById('addTaskBtn'); // Кнопка "Добавить задачу"
-const taskForm = document.getElementById('taskForm'); // Модальное окно
-const closeBtn = document.querySelector('.close'); // Кнопка закрытия модального окна
-const taskFormContent = document.getElementById('taskFormContent'); // Форма
-const taskListElement = document.getElementById('taskList'); // Список задач (DOM-элемент)
-const searchInput = document.getElementById('searchInput'); // Поле поиска
-
+const addTaskBtn = document.getElementById('addTaskBtn'); 
+const taskForm = document.getElementById('taskForm'); 
+const closeBtn = document.querySelector('.close'); 
+const taskFormContent = document.getElementById('taskFormContent');
+const taskListElement = document.getElementById('taskList'); 
+const searchInput = document.getElementById('searchInput');
 
 let tasks = [];
 
@@ -177,8 +176,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
-
 function searchTasks() {
     const searchText = searchInput.value.toLowerCase();
     const filteredTasks = tasks.filter(task => task.title.toLowerCase().includes(searchText)); 
@@ -186,4 +183,3 @@ function searchTasks() {
 }
 
 
-searchInput.addEventListener('input', searchTasks);
