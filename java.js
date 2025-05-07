@@ -171,11 +171,12 @@ closeBtn.onclick = function () {
 };
 
 
-window.onclick = function (event) {
+document.addEventListener('click', function(event) {
     if (event.target === taskForm) {
         taskForm.style.display = 'none';
     }
-};
+});
+
 
 
 function searchTasks() {
