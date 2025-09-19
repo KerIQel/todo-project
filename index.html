@@ -3,84 +3,502 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TaskX</title>
-    <link rel="stylesheet" href="style.css">
-   
+    <title>Для Насти</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffd1dc, #f8c8dc, #f5d0e6);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .name {
+            font-size: 8rem;
+            font-weight: bold;
+            color: transparent;
+            -webkit-text-stroke: 3px #d42a7d;
+            text-shadow: 0 0 30px rgba(212, 42, 125, 0.7);
+            animation: glow 3s infinite alternate, float 4s infinite ease-in-out;
+            position: relative;
+            display: inline-block;
+            padding: 0 20px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .name:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .love-text {
+            font-size: 6rem;
+            font-weight: bold;
+            color: transparent;
+            -webkit-text-stroke: 2px #ff3366;
+            text-shadow: 0 0 25px rgba(255, 51, 102, 0.7);
+            animation: glowLove 3s infinite alternate, floatLove 5s infinite ease-in-out;
+            margin: 30px 0;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .love-text:hover {
+            transform: scale(1.05);
+        }
+
+        .photo-container {
+            position: relative;
+            width: 350px;
+            height: 450px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            animation: frameFloat 6s infinite ease-in-out;
+            transform-style: preserve-3d;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.03) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+        }
+
+        .photo-content {
+            width: 90%;
+            height: 90%;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .custom-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: all 0.5s ease;
+            transform: scale(1);
+            filter: brightness(1.05) contrast(1.05);
+        }
+
+        .photo-frame:hover .custom-image {
+            transform: scale(1.05);
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .decorations {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #ff6b93;
+            opacity: 0.7;
+            animation: decorationFloat 8s infinite ease-in-out;
+        }
+
+        /* Эффекты */
+        .effect {
+            position: absolute;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .heart-effect {
+            color: #ff6b93;
+            font-size: 2rem;
+            opacity: 0;
+            animation: heartFloat 2s forwards;
+        }
+
+        .sparkle-effect {
+            color: #fff;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: sparkleFloat 1.5s forwards;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b93;
+            opacity: 0;
+            animation: confettiFall 5s linear forwards;
+        }
+
+        /* Анимированные элементы фона */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            animation: floatBubble 15s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.5;
+            color: #ff6b93;
+            animation: floatHeart 8s infinite ease-in-out;
+            z-index: 1;
+        }
+
+        /* Анимации */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 10px rgba(212, 42, 125, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 30px rgba(212, 42, 125, 0.9), 0 0 40px rgba(212, 42, 125, 0.6), 0 0 60px rgba(212, 42, 125, 0.4);
+            }
+        }
+
+        @keyframes glowLove {
+            0% {
+                text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 25px rgba(255, 51, 102, 0.9), 0 0 35px rgba(255, 51, 102, 0.6), 0 0 50px rgba(255, 51, 102, 0.4);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @keyframes floatLove {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes frameFloat {
+            0%, 100% {
+                transform: translateY(0) rotateX(2deg) rotateY(2deg);
+            }
+            50% {
+                transform: translateY(-15px) rotateX(-2deg) rotateY(-2deg);
+            }
+        }
+
+        @keyframes decorationFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(20deg);
+            }
+        }
+
+        @keyframes heartFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(0.5);
+            }
+            50% {
+                opacity: 0.8;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(0, -100px) scale(1.5);
+            }
+        }
+
+        @keyframes sparkleFloat {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--tx), var(--ty)) scale(2) rotate(180deg);
+            }
+        }
+
+        @keyframes confettiFall {
+            0% {
+                opacity: 1;
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        @keyframes floatBubble {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-100px) translateX(30px) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes floatHeart {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% {
+                transform: translateY(-70px) rotate(20deg);
+                opacity: 0.7;
+            }
+        }
+
+        /* Адаптивность для мобильных устройств */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 5rem;
+                -webkit-text-stroke: 2px #d42a7d;
+            }
+            
+            .love-text {
+                font-size: 4rem;
+            }
+            
+            .photo-container {
+                width: 300px;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .name {
+                font-size: 4rem;
+            }
+            
+            .love-text {
+                font-size: 3rem;
+            }
+            
+            .photo-container {
+                width: 280px;
+                height: 380px;
+            }
+        }
+    </style>
 </head>
 <body>
- 
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <h1>TaskX</h1>
-  
-    </header>
-
-   
     <div class="container">
-        <button id="addTaskBtn">Добавить задачу</button>
-        <div id="taskForm" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Добавить задачу</h2>
-                <form id="taskFormContent">
-                    <label for="title">Название:</label>
-                    <input type="text" id="title" required>
-                    <label for="description">Описание:</label>
-                    <textarea id="description"></textarea>
-                    <label for="deadline">Дедлайн:</label>
-                    <input type="date" id="deadline" required>
-                    <label for="tags">Теги:</label>
-                    <input type="text" id="tags">
-                    <label for="status">Статус:</label>
-                    <select id="status">
-                        <option value="pending">В процессе</option>
-                        <option value="completed">Завершено</option>
-                    </select>
-                    <button type="submit">Сохранить</button>
-                </form>
+        <h1 class="name">Настя</h1>
+        
+        <div class="photo-container">
+            <div class="photo-frame">
+                <div class="photo-content">
+                   
+                    <img src="ww.jpg" alt="Фото Насти" class="custom-image">
+                    
+                </div>
+                
+                <div class="decorations">
+                    <div class="decoration" style="top: 10%; left: 15%;">✦</div>
+                    <div class="decoration" style="top: 20%; right: 10%;">❀</div>
+                    <div class="decoration" style="bottom: 15%; left: 10%;">✨</div>
+                    <div class="decoration" style="bottom: 25%; right: 15%;">❁</div>
+                </div>
             </div>
         </div>
-        <div id="taskList" class="task-grid"></div>
+
+        <div class="love-text">люблю</div>
     </div>
 
-    
-    <footer>
-        <div class="footer-content">
-          
-            <div class="footer-section">
-                <h3>Контакты</h3>
-                <p>Email: <a href="mailto:support@taskx.com">support@taskx.com</a></p>
-                <p>Телефон: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
-            </div>
-
+    <script>
+        // Создаем пузыри для фона
+        function createBubbles() {
+            const body = document.querySelector('body');
+            const bubblesCount = 20;
             
-            <div class="footer-section">
-                <h3>Мы в соцсетях</h3>
-                <ul class="social-links">
-                    <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-                    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-                    <li><a href="https://vk.com" target="_blank">VK</a></li>
-                    <li><a href="https://tiktok.com" target="_blank">TikTok</a></li>
-                </ul>
-            </div>
-
-          
-            <div class="footer-section">
-                <h3>Служба поддержки</h3>
-                <p>Email: <a href="mailto:help@taskx.com">help@taskx.com</a></p>
-                <p>Часы работы: Пн-Пт, 9:00 - 18:00</p>
-            </div>
-
+            for (let i = 0; i < bubblesCount; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+                
+                const size = Math.random() * 100 + 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                
+                bubble.style.left = `${Math.random() * 100}vw`;
+                bubble.style.top = `${Math.random() * 100}vh`;
+                
+                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                
+                body.appendChild(bubble);
+            }
+        }
         
-            <div class="footer-section">
-                <h3>Наш адрес</h3>
-                <p>г. Москва, ул. Примерная, д. 123</p>
-                <p><a href="https://maps.google.com" target="_blank">Посмотреть на карте</a></p>
-            </div>
-        </div>
-    </footer>
- <script src="js.js"></script>
-    
+        // Создаем плавающие сердца
+        function createHearts() {
+            const body = document.querySelector('body');
+            const heartsCount = 15;
+            
+            for (let i = 0; i < heartsCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤';
+                
+                heart.style.left = `${Math.random() * 100}vw`;
+                heart.style.top = `${Math.random() * 100}vh`;
+                
+                heart.style.animationDelay = `${Math.random() * 4}s`;
+                
+                body.appendChild(heart);
+            }
+        }
+        
+        // Создаем эффект сердечек при клике
+        function createHeartEffect(x, y) {
+            const heart = document.createElement('div');
+            heart.classList.add('effect', 'heart-effect');
+            heart.innerHTML = '❤';
+            heart.style.left = `${x}px`;
+            heart.style.top = `${y}px`;
+            
+            document.body.appendChild(heart);
+            
+            // Удаляем элемент после завершения анимации
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+        
+        // Создаем эффект блесток при клике
+        function createSparkleEffect(x, y) {
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.classList.add('effect', 'sparkle-effect');
+                sparkle.innerHTML = '✨';
+                sparkle.style.left = `${x}px`;
+                sparkle.style.top = `${y}px`;
+                
+                // Случайное направление разлета
+                const angle = (i / 8) * Math.PI * 2;
+                const distance = 100;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                sparkle.style.setProperty('--tx', `${tx}px`);
+                sparkle.style.setProperty('--ty', `${ty}px`);
+                
+                document.body.appendChild(sparkle);
+                
+                // Удаляем элемент после завершения анимации
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 1500);
+            }
+        }
+        
+        // Создаем эффект конфетти
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Случайный цвет
+                const colors = ['#ff6b93', '#ff3366', '#ff4d7d', '#ff85a2', '#ff4d94'];
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Случайная позиция
+                confetti.style.left = `${Math.random() * 100}vw`;
+                
+                // Случайный размер
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = `${size}px`;
+                confetti.style.height = `${size}px`;
+                
+                // Случайная задержка
+                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                
+                document.body.appendChild(confetti);
+                
+                // Удаляем элемент после завершения анимации
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Обработчики кликов для эффектов
+        document.querySelector('.name').addEventListener('click', function(e) {
+            createHeartEffect(e.clientX, e.clientY);
+            createSparkleEffect(e.clientX, e.clientY);
+            createConfetti();
+        });
+        
+        document.querySelector('.photo-frame').addEventListener('click', function(e) {
+            createHeartEffect(e.clientX, e.clientY);
+            createSparkleEffect(e.clientX, e.clientY);
+            createConfetti();
+        });
+        
+        document.querySelector('.love-text').addEventListener('click', function(e) {
+            createHeartEffect(e.clientX, e.clientY);
+            createSparkleEffect(e.clientX, e.clientY);
+            createConfetti();
+        });
+        
+        // Запускаем создание элементов после загрузки страницы
+        window.addEventListener('load', () => {
+            createBubbles();
+            createHearts();
+        });
+    </script>
 </body>
 </html>
