@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Для Насти</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,15 +14,24 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffd1dc, #f8c8dc, #f5d0e6);
+            background: linear-gradient(-45deg, #ffd1dc, #f8c8dc, #f5d0e6, #ff9a9e, #fecfef, #fecfef);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Dancing Script', cursive;
             padding: 20px;
+            position: relative;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .container {
@@ -30,102 +40,235 @@
             z-index: 2;
             max-width: 1200px;
             width: 100%;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeInUp 2s ease-out 0.5s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .name {
+            font-family: 'Playfair Display', serif;
             font-size: 8rem;
-            font-weight: bold;
-            color: transparent;
-            -webkit-text-stroke: 3px #d42a7d;
-            text-shadow: 0 0 30px rgba(212, 42, 125, 0.7);
-            animation: glow 3s infinite alternate, float 4s infinite ease-in-out;
+            font-weight: 900;
+            background: linear-gradient(45deg, #d42a7d, #ff3366, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 0 20px rgba(212, 42, 125, 0.6),
+                0 0 40px rgba(255, 51, 102, 0.4),
+                0 0 60px rgba(255, 105, 180, 0.2);
+            animation: glow 3s infinite alternate, float 6s infinite ease-in-out;
             position: relative;
             display: inline-block;
             padding: 0 20px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             cursor: pointer;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            letter-spacing: 2px;
+        }
+
+        .name::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 105, 180, 0.3) 50%, transparent 70%);
+            border-radius: 50px;
+            z-index: -1;
+            animation: shimmer 4s linear infinite;
         }
 
         .name:hover {
             transform: scale(1.05) rotate(2deg);
+            text-shadow: 
+                0 0 30px rgba(212, 42, 125, 0.8),
+                0 0 50px rgba(255, 51, 102, 0.6),
+                0 0 80px rgba(255, 105, 180, 0.4);
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .love-text {
+            font-family: 'Dancing Script', cursive;
             font-size: 6rem;
-            font-weight: bold;
-            color: transparent;
-            -webkit-text-stroke: 2px #ff3366;
-            text-shadow: 0 0 25px rgba(255, 51, 102, 0.7);
-            animation: glowLove 3s infinite alternate, floatLove 5s infinite ease-in-out;
-            margin: 30px 0;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff3366, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 
+                0 0 15px rgba(255, 51, 102, 0.6),
+                0 0 30px rgba(255, 105, 180, 0.4),
+                0 0 50px rgba(255, 20, 147, 0.2);
+            animation: glowLove 3s infinite alternate, floatLove 7s infinite ease-in-out;
+            margin: 40px 0;
             cursor: pointer;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+        }
+
+        .love-text::after {
+            content: '💖';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+            opacity: 0.8;
         }
 
         .love-text:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(-1deg);
+            text-shadow: 
+                0 0 25px rgba(255, 51, 102, 0.8),
+                0 0 40px rgba(255, 105, 180, 0.6),
+                0 0 60px rgba(255, 20, 147, 0.4);
         }
 
-        .photo-container {
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        /* Три рамки в ряд */
+        .slideshow-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInScale 2s ease-out 1s forwards;
+        }
+
+        .slideshow-container {
             position: relative;
-            width: 350px;
-            height: 450px;
-            margin: 0 auto;
-            perspective: 1000px;
+            width: 280px;
+            height: 360px;
+            perspective: 1200px;
         }
 
-        .photo-frame {
+        .slideshow-frame {
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.5);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1));
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 3px solid rgba(255, 255, 255, 0.6);
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            animation: frameFloat 6s infinite ease-in-out;
+            animation: frameFloat 8s infinite ease-in-out;
             transform-style: preserve-3d;
             cursor: pointer;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
         }
 
-        .photo-frame:hover {
-            transform: scale(1.03) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+        .slideshow-frame:nth-child(1) { animation-delay: 0s; }
+        .slideshow-frame:nth-child(2) { animation-delay: 2s; }
+        .slideshow-frame:nth-child(3) { animation-delay: 4s; }
+
+        .slideshow-frame::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 105, 180, 0.2) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s;
         }
 
-        .photo-content {
-            width: 90%;
-            height: 90%;
-            border-radius: 10px;
+        .slideshow-frame:hover::before {
+            opacity: 1;
+        }
+
+        .slideshow-frame:hover {
+            transform: scale(1.05) rotateX(8deg) rotateY(8deg);
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            border-color: rgba(255, 105, 180, 0.8);
+        }
+
+        .slideshow-content {
+            width: 92%;
+            height: 92%;
+            border-radius: 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             overflow: hidden;
             position: relative;
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
-        .custom-image {
+        .slideshow-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 8px;
-            transition: all 0.5s ease;
-            transform: scale(1);
-            filter: brightness(1.05) contrast(1.05);
+            border-radius: 15px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
         }
 
-        .photo-frame:hover .custom-image {
-            transform: scale(1.05);
-            filter: brightness(1.1) contrast(1.1);
+        .slideshow-image.active {
+            opacity: 1;
         }
 
-        .decorations {
+        .slideshow-frame:hover .slideshow-image.active {
+            transform: scale(1.08);
+            filter: brightness(1.2) contrast(1.15) saturate(1.3);
+        }
+
+        .slideshow-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .nav-dot.active {
+            background: #ff69b4;
+            transform: scale(1.2);
+        }
+
+        .slideshow-decorations {
             position: absolute;
             top: 0;
             left: 0;
@@ -134,12 +277,21 @@
             pointer-events: none;
         }
 
-        .decoration {
+        .slideshow-decoration {
             position: absolute;
             font-size: 1.5rem;
-            color: #ff6b93;
-            opacity: 0.7;
-            animation: decorationFloat 8s infinite ease-in-out;
+            background: linear-gradient(45deg, #ff1493, #ff69b4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.8;
+            animation: decorationFloat 10s infinite ease-in-out;
+            transition: all 0.3s;
+        }
+
+        .slideshow-frame:hover .slideshow-decoration {
+            transform: scale(1.2);
+            opacity: 1;
         }
 
         /* Эффекты */
@@ -147,83 +299,104 @@
             position: absolute;
             pointer-events: none;
             z-index: 10;
+            font-size: 2rem;
         }
 
         .heart-effect {
-            color: #ff6b93;
-            font-size: 2rem;
+            color: #ff69b4;
             opacity: 0;
-            animation: heartFloat 2s forwards;
+            animation: heartFloat 3s forwards cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            text-shadow: 0 0 10px rgba(255, 105, 180, 0.6);
         }
 
         .sparkle-effect {
             color: #fff;
-            font-size: 1.5rem;
             opacity: 0;
-            animation: sparkleFloat 1.5s forwards;
+            animation: sparkleFloat 2s forwards;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         .confetti {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            background: #ff6b93;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            border-radius: 50%;
             opacity: 0;
-            animation: confettiFall 5s linear forwards;
+            animation: confettiFall 6s linear forwards;
+            box-shadow: 0 0 5px rgba(255, 105, 180, 0.5);
         }
 
         /* Анимированные элементы фона */
         .bubble {
             position: absolute;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.4);
-            animation: floatBubble 15s infinite ease-in-out;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+            animation: floatBubble 20s infinite ease-in-out;
             z-index: 1;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
         }
 
         .heart {
             position: absolute;
-            font-size: 2rem;
-            opacity: 0.5;
-            color: #ff6b93;
-            animation: floatHeart 8s infinite ease-in-out;
+            font-size: 2.5rem;
+            opacity: 0.6;
+            background: linear-gradient(45deg, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: floatHeart 10s infinite ease-in-out;
             z-index: 1;
+            text-shadow: 0 0 15px rgba(255, 105, 180, 0.4);
         }
 
         /* Анимации */
         @keyframes glow {
             0% {
-                text-shadow: 0 0 10px rgba(212, 42, 125, 0.5);
+                text-shadow: 
+                    0 0 20px rgba(212, 42, 125, 0.6),
+                    0 0 40px rgba(255, 51, 102, 0.4),
+                    0 0 60px rgba(255, 105, 180, 0.2);
             }
             100% {
-                text-shadow: 0 0 30px rgba(212, 42, 125, 0.9), 0 0 40px rgba(212, 42, 125, 0.6), 0 0 60px rgba(212, 42, 125, 0.4);
+                text-shadow: 
+                    0 0 30px rgba(212, 42, 125, 0.8),
+                    0 0 50px rgba(255, 51, 102, 0.6),
+                    0 0 80px rgba(255, 105, 180, 0.4),
+                    0 0 100px rgba(255, 105, 180, 0.2);
             }
         }
 
         @keyframes glowLove {
             0% {
-                text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+                text-shadow: 
+                    0 0 15px rgba(255, 51, 102, 0.6),
+                    0 0 30px rgba(255, 105, 180, 0.4),
+                    0 0 50px rgba(255, 20, 147, 0.2);
             }
             100% {
-                text-shadow: 0 0 25px rgba(255, 51, 102, 0.9), 0 0 35px rgba(255, 51, 102, 0.6), 0 0 50px rgba(255, 51, 102, 0.4);
+                text-shadow: 
+                    0 0 25px rgba(255, 51, 102, 0.8),
+                    0 0 40px rgba(255, 105, 180, 0.6),
+                    0 0 60px rgba(255, 20, 147, 0.4);
             }
         }
 
         @keyframes float {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0deg);
             }
             50% {
-                transform: translateY(-20px);
+                transform: translateY(-25px) rotate(2deg);
             }
         }
 
         @keyframes floatLove {
             0%, 100% {
-                transform: translateY(0);
+                transform: translateY(0) rotate(0deg);
             }
             50% {
-                transform: translateY(-15px);
+                transform: translateY(-20px) rotate(-1deg);
             }
         }
 
@@ -232,30 +405,31 @@
                 transform: translateY(0) rotateX(2deg) rotateY(2deg);
             }
             50% {
-                transform: translateY(-15px) rotateX(-2deg) rotateY(-2deg);
+                transform: translateY(-20px) rotateX(-2deg) rotateY(-2deg);
             }
         }
 
         @keyframes decorationFloat {
             0%, 100% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) rotate(0deg) scale(1);
             }
             50% {
-                transform: translateY(-20px) rotate(20deg);
+                transform: translateY(-25px) rotate(15deg) scale(1.1);
             }
         }
 
         @keyframes heartFloat {
             0% {
                 opacity: 1;
-                transform: translate(0, 0) scale(0.5);
+                transform: translateY(0) scale(0.8) rotate(0deg);
             }
             50% {
-                opacity: 0.8;
+                opacity: 0.9;
+                transform: translateY(-50px) scale(1.2) rotate(10deg);
             }
             100% {
                 opacity: 0;
-                transform: translate(0, -100px) scale(1.5);
+                transform: translateY(-120px) scale(1.8) rotate(20deg);
             }
         }
 
@@ -266,57 +440,74 @@
             }
             100% {
                 opacity: 0;
-                transform: translate(var(--tx), var(--ty)) scale(2) rotate(180deg);
+                transform: translate(var(--tx), var(--ty)) scale(1.5) rotate(360deg);
             }
         }
 
         @keyframes confettiFall {
             0% {
                 opacity: 1;
-                transform: translateY(-100px) rotate(0deg);
+                transform: translateY(-100px) rotate(0deg) scale(0.5);
+            }
+            50% {
+                opacity: 1;
+                transform: translateY(50vh) rotate(180deg) scale(1);
             }
             100% {
                 opacity: 0;
-                transform: translateY(100vh) rotate(360deg);
+                transform: translateY(100vh) rotate(720deg) scale(0.5);
             }
         }
 
         @keyframes floatBubble {
             0%, 100% {
                 transform: translateY(0) translateX(0) scale(1);
-                opacity: 0.6;
+                opacity: 0.7;
             }
             50% {
-                transform: translateY(-100px) translateX(30px) scale(1.2);
-                opacity: 0.8;
+                transform: translateY(-120px) translateX(40px) scale(1.3);
+                opacity: 0.9;
             }
         }
 
         @keyframes floatHeart {
             0%, 100% {
                 transform: translateY(0) rotate(0deg);
-                opacity: 0.3;
+                opacity: 0.4;
             }
             50% {
-                transform: translateY(-70px) rotate(20deg);
-                opacity: 0.7;
+                transform: translateY(-80px) rotate(15deg);
+                opacity: 0.8;
             }
         }
 
-        /* Адаптивность для мобильных устройств */
+        @keyframes fadeInScale {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Адаптивность */
         @media (max-width: 768px) {
             .name {
                 font-size: 5rem;
-                -webkit-text-stroke: 2px #d42a7d;
+                letter-spacing: 1px;
             }
             
             .love-text {
                 font-size: 4rem;
             }
             
-            .photo-container {
-                width: 300px;
-                height: 400px;
+            .slideshow-row {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            .slideshow-container {
+                width: 250px;
+                height: 320px;
             }
         }
 
@@ -329,9 +520,9 @@
                 font-size: 3rem;
             }
             
-            .photo-container {
-                width: 280px;
-                height: 380px;
+            .slideshow-container {
+                width: 220px;
+                height: 280px;
             }
         }
     </style>
@@ -339,20 +530,81 @@
 <body>
     <div class="container">
         <h1 class="name">Настя</h1>
-        
-        <div class="photo-container">
-            <div class="photo-frame">
-                <div class="photo-content">
-                   
-                    <img src="ww.jpg" alt="Фото Насти" class="custom-image">
+
+        <!-- Три рамки в ряд со слайдшоу -->
+        <div class="slideshow-row">
+            <!-- Первая рамка -->
+            <div class="slideshow-container" data-slideshow="1">
+                <div class="slideshow-frame">
+                    <div class="slideshow-content">
+                        <!-- Вставьте пути к вашим фотографиям для первой рамки здесь -->
+                        <img src="ww1.jpg" alt="Фото 1-1" class="slideshow-image active" data-index="0">
+                        <img src="ww2.jpg" alt="Фото 1-2" class="slideshow-image" data-index="1">
+                        <img src="ww3.jpg" alt="Фото 1-3" class="slideshow-image" data-index="2">
+                    </div>
                     
+                    <div class="slideshow-decorations">
+                        <div class="slideshow-decoration" style="top: 10%; left: 15%;">✦</div>
+                        <div class="slideshow-decoration" style="top: 20%; right: 10%;">❀</div>
+                        <div class="slideshow-decoration" style="bottom: 15%; left: 10%;">✨</div>
+                        <div class="slideshow-decoration" style="bottom: 25%; right: 15%;">❁</div>
+                    </div>
+
+                    <div class="slideshow-nav">
+                        <div class="nav-dot active" data-slide="0"></div>
+                        <div class="nav-dot" data-slide="1"></div>
+                        <div class="nav-dot" data-slide="2"></div>
+                    </div>
                 </div>
-                
-                <div class="decorations">
-                    <div class="decoration" style="top: 10%; left: 15%;">✦</div>
-                    <div class="decoration" style="top: 20%; right: 10%;">❀</div>
-                    <div class="decoration" style="bottom: 15%; left: 10%;">✨</div>
-                    <div class="decoration" style="bottom: 25%; right: 15%;">❁</div>
+            </div>
+
+            <!-- Вторая рамка -->
+            <div class="slideshow-container" data-slideshow="2">
+                <div class="slideshow-frame">
+                    <div class="slideshow-content">
+                        <!-- Вставьте пути к вашим фотографиям для второй рамки здесь -->
+                        <img src="ww.jpg" alt="Фото 2-1" class="slideshow-image active" data-index="0">
+                        <img src="ww4.jpg" alt="Фото 2-2" class="slideshow-image" data-index="1">
+                        <img src="ww5.jpg" alt="Фото 2-3" class="slideshow-image" data-index="2">
+                    </div>
+                    
+                    <div class="slideshow-decorations">
+                        <div class="slideshow-decoration" style="top: 15%; left: 20%;">✦</div>
+                        <div class="slideshow-decoration" style="top: 25%; right: 15%;">❀</div>
+                        <div class="slideshow-decoration" style="bottom: 20%; left: 15%;">✨</div>
+                        <div class="slideshow-decoration" style="bottom: 30%; right: 20%;">❁</div>
+                    </div>
+
+                    <div class="slideshow-nav">
+                        <div class="nav-dot active" data-slide="0"></div>
+                        <div class="nav-dot" data-slide="1"></div>
+                        <div class="nav-dot" data-slide="2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Третья рамка -->
+            <div class="slideshow-container" data-slideshow="3">
+                <div class="slideshow-frame">
+                    <div class="slideshow-content">
+                        <!-- Вставьте пути к вашим фотографиям для третьей рамки здесь -->
+                        <img src="ww6.jpg" alt="Фото 3-1" class="slideshow-image active" data-index="0">
+                        <img src="ww8.jpg" alt="Фото 3-2" class="slideshow-image" data-index="1">
+                        <img src="ww7.jpg" alt="Фото 3-3" class="slideshow-image" data-index="2">
+                    </div>
+                    
+                    <div class="slideshow-decorations">
+                        <div class="slideshow-decoration" style="top: 10%; left: 15%;">✦</div>
+                        <div class="slideshow-decoration" style="top: 20%; right: 10%;">❀</div>
+                        <div class="slideshow-decoration" style="bottom: 15%; left: 10%;">✨</div>
+                        <div class="slideshow-decoration" style="bottom: 25%; right: 15%;">❁</div>
+                    </div>
+
+                    <div class="slideshow-nav">
+                        <div class="nav-dot active" data-slide="0"></div>
+                        <div class="nav-dot" data-slide="1"></div>
+                        <div class="nav-dot" data-slide="2"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -361,23 +613,65 @@
     </div>
 
     <script>
+        // Слайдшоу логика для каждой рамки
+        function initSlideshow(container) {
+            const id = container.getAttribute('data-slideshow');
+            const slides = container.querySelectorAll('.slideshow-image');
+            const dots = container.querySelectorAll('.nav-dot');
+            let currentSlide = 0;
+
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                dots.forEach(dot => dot.classList.remove('active'));
+                if (slides[index]) {
+                    slides[index].classList.add('active');
+                }
+                if (dots[index]) {
+                    dots[index].classList.add('active');
+                }
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+
+            // Автоматическая смена каждые 3 секунды, с разной задержкой для каждой рамки
+            const delay = (parseInt(id) - 1) * 1000; // Разная задержка для синхронизации
+            setTimeout(() => {
+                setInterval(nextSlide, 3000);
+            }, delay);
+
+            // Клик по точкам
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+        }
+
+        // Инициализация всех слайдшоу
+        document.querySelectorAll('.slideshow-container').forEach(initSlideshow);
+
         // Создаем пузыри для фона
         function createBubbles() {
             const body = document.querySelector('body');
-            const bubblesCount = 20;
+            const bubblesCount = 25;
             
             for (let i = 0; i < bubblesCount; i++) {
                 const bubble = document.createElement('div');
                 bubble.classList.add('bubble');
                 
-                const size = Math.random() * 100 + 20;
+                const size = Math.random() * 80 + 30;
                 bubble.style.width = `${size}px`;
                 bubble.style.height = `${size}px`;
                 
                 bubble.style.left = `${Math.random() * 100}vw`;
                 bubble.style.top = `${Math.random() * 100}vh`;
                 
-                bubble.style.animationDelay = `${Math.random() * 5}s`;
+                bubble.style.animationDelay = `${Math.random() * 10}s`;
+                bubble.style.animationDuration = `${Math.random() * 10 + 10}s`;
                 
                 body.appendChild(bubble);
             }
@@ -386,17 +680,18 @@
         // Создаем плавающие сердца
         function createHearts() {
             const body = document.querySelector('body');
-            const heartsCount = 15;
+            const heartsCount = 20;
             
             for (let i = 0; i < heartsCount; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('heart');
-                heart.innerHTML = '❤';
+                heart.innerHTML = '💖';
                 
                 heart.style.left = `${Math.random() * 100}vw`;
                 heart.style.top = `${Math.random() * 100}vh`;
                 
-                heart.style.animationDelay = `${Math.random() * 4}s`;
+                heart.style.animationDelay = `${Math.random() * 8}s`;
+                heart.style.animationDuration = `${Math.random() * 8 + 8}s`;
                 
                 body.appendChild(heart);
             }
@@ -406,30 +701,28 @@
         function createHeartEffect(x, y) {
             const heart = document.createElement('div');
             heart.classList.add('effect', 'heart-effect');
-            heart.innerHTML = '❤';
+            heart.innerHTML = '💖';
             heart.style.left = `${x}px`;
             heart.style.top = `${y}px`;
             
             document.body.appendChild(heart);
             
-            // Удаляем элемент после завершения анимации
             setTimeout(() => {
                 heart.remove();
-            }, 2000);
+            }, 3000);
         }
         
         // Создаем эффект блесток при клике
         function createSparkleEffect(x, y) {
-            for (let i = 0; i < 8; i++) {
+            for (let i = 0; i < 12; i++) {
                 const sparkle = document.createElement('div');
                 sparkle.classList.add('effect', 'sparkle-effect');
                 sparkle.innerHTML = '✨';
                 sparkle.style.left = `${x}px`;
                 sparkle.style.top = `${y}px`;
                 
-                // Случайное направление разлета
-                const angle = (i / 8) * Math.PI * 2;
-                const distance = 100;
+                const angle = (i / 12) * Math.PI * 2;
+                const distance = 120;
                 const tx = Math.cos(angle) * distance;
                 const ty = Math.sin(angle) * distance;
                 
@@ -438,40 +731,35 @@
                 
                 document.body.appendChild(sparkle);
                 
-                // Удаляем элемент после завершения анимации
                 setTimeout(() => {
                     sparkle.remove();
-                }, 1500);
+                }, 2000);
             }
         }
         
         // Создаем эффект конфетти
         function createConfetti() {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 150; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 
-                // Случайный цвет
-                const colors = ['#ff6b93', '#ff3366', '#ff4d7d', '#ff85a2', '#ff4d94'];
-                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                const colors = ['#ff6b93', '#ff3366', '#ff4d7d', '#ff85a2', '#ff4d94', '#ff69b4'];
+                confetti.style.background = `linear-gradient(45deg, ${colors[Math.floor(Math.random() * colors.length)]}, #fff)`;
                 
-                // Случайная позиция
                 confetti.style.left = `${Math.random() * 100}vw`;
                 
-                // Случайный размер
-                const size = Math.random() * 10 + 5;
+                const size = Math.random() * 12 + 6;
                 confetti.style.width = `${size}px`;
                 confetti.style.height = `${size}px`;
                 
-                // Случайная задержка
-                confetti.style.animationDelay = `${Math.random() * 2}s`;
+                confetti.style.animationDelay = `${Math.random() * 3}s`;
+                confetti.style.animationDuration = `${Math.random() * 3 + 4}s`;
                 
                 document.body.appendChild(confetti);
                 
-                // Удаляем элемент после завершения анимации
                 setTimeout(() => {
                     confetti.remove();
-                }, 5000);
+                }, 7000);
             }
         }
         
@@ -482,10 +770,23 @@
             createConfetti();
         });
         
-        document.querySelector('.photo-frame').addEventListener('click', function(e) {
-            createHeartEffect(e.clientX, e.clientY);
-            createSparkleEffect(e.clientX, e.clientY);
-            createConfetti();
+        document.querySelectorAll('.slideshow-frame').forEach(frame => {
+            frame.addEventListener('click', function(e) {
+                createHeartEffect(e.clientX, e.clientY);
+                createSparkleEffect(e.clientX, e.clientY);
+                createConfetti();
+                // Переключить слайд в этой рамке
+                const container = frame.closest('.slideshow-container');
+                const slides = container.querySelectorAll('.slideshow-image');
+                const current = Array.from(slides).findIndex(s => s.classList.contains('active'));
+                const next = (current + 1) % slides.length;
+                slides[next].classList.add('active');
+                slides[current].classList.remove('active');
+                // Обновить точки
+                const dots = container.querySelectorAll('.nav-dot');
+                dots[next].classList.add('active');
+                dots[current].classList.remove('active');
+            });
         });
         
         document.querySelector('.love-text').addEventListener('click', function(e) {
